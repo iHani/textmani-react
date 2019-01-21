@@ -1,31 +1,56 @@
 import React, { useState, useEffect } from 'react';
 
 export default function Manipulator(props) {
-  const [text, setText] = useState();
+  const {text, handleChangeText} = props;
   const [statusMessage, setStatusMessage] = useState('Type or paste text above to manipulate');
-  const updateText = ({ target }) => {
-    setText(target.value);
-    setStatusMessage('Ready');
-  }
-  const clearText = () => setText('');
+  const [words, setWords] = useState(0);
+  const [chars, setChars] = useState(0);
   const textarea = React.createRef();
-  // console.log(textarea)
 
   useEffect(() => {
     textarea.current.focus();
-    // if (!text.trim()) {
-    //   setStatusMessage('Type or paste text above to manipulate');
-    // }
   });
+
+  function clearText() {
+    handleChangeText('');
+    setWords(0);
+    setChars(0);
+  }
+
+  function countWords(text){
+    if (text.trim()) {
+      let ar = 0, en = 0;
+      if (text.match(/\S/g)) {
+        //Arabic words
+        let pta = /[\u0600-\u06FF]+/g
+        if (pta.test(text)) { ar = text.match(pta).length }
+        //English words
+        let pte = /\w+/g
+        if (pte.test(text)) { en = text.match(pte).length }
+        return ar + en
+      } else { return 0 }
+    }  else { return 0 }
+  }
+
+  function countChars(text){
+    return text.length;
+  }
+
+  const handleOnChange = (e) => {
+    const text = e.target.value;
+    handleChangeText(text);
+    setWords(countWords(text));
+    setChars(countChars(text));
+  }
 
   return (
     <div>
       <div className="form-group">
         <textarea
           value={text}
-          onChange={updateText}
-          ref={textarea}
+          onChange={handleOnChange}
           className="form-control"
+          ref={textarea}
           rows="5"
           placeholder="..."
           autoFocus>
@@ -39,12 +64,12 @@ export default function Manipulator(props) {
             <div className="row">
               <div className="col-sm-6">
                 <h6>
-                  words: 8652
+                  words: {words}
                 </h6>
               </div>
               <div className="col-sm-6">
                 <h6>
-                  Chars: 12860
+                  chars: {chars}
                 </h6>
               </div>
             </div>
@@ -72,5 +97,3 @@ export default function Manipulator(props) {
     </div>
   );
 }
-
-// export default Manipulator;

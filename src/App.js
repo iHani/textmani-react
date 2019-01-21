@@ -1,40 +1,36 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './Components/Header';
 import Manipulator from './Components/Manipulator';
 import Generator from './Components/Generator';
 import MyDocs from './Components/MyDocs';
-// import MyComponent from './Components/MyDocs';
 
-class App extends Component {
-  state = {
-    tabs: [ "Manipulate text", "Lorem ipsum Generator", "My Docs"],
-    activeTab: "Manipulate text",
-  }
+const allTabs = ["Manipulate text", "Lorem ipsum Generator", "My Docs"];
 
-  getComponent = (tab) => {
+export default function App() {
+  const [tabs] = useState(allTabs);
+  const [activeTab, setActiveTab] = useState("Manipulate text");
+  const [manipulatorText, setManipulatorText] = useState();
+  const [generatorText, setGeneratorText] = useState();
+
+  const getComponent = (tab) => {
     switch (tab) {
-      case "Manipulate text": return <Manipulator />
+      case "Manipulate text": return <Manipulator text={manipulatorText} handleChangeText={setManipulatorText}/>
       case "Lorem ipsum Generator": return <Generator />
       case "My Docs": return <MyDocs />
       default:
     }
   }
 
-  handleClickTab = (activeTab) => this.setState({ activeTab });
+  const handleClickTab = (activeTab) => setActiveTab(activeTab);
 
-  render() {
-    const { tabs, activeTab } = this.state;
-    return (
-      <div>
-        <Header tabs={tabs} activeTab={activeTab} handleClickTab={this.handleClickTab}/>
-        <div className="container">
-          <div className="py-2">
-            {this.getComponent(activeTab)}
-          </div>
+  return (
+    <div>
+      <Header tabs={tabs} activeTab={activeTab} handleClickTab={handleClickTab}/>
+      <div className="container">
+        <div className="py-2">
+          {getComponent(activeTab)}
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
-
-export default App;
