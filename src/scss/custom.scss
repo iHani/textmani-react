@@ -11,6 +11,19 @@ h6{
   font-weight: 200;
   // font-size: .9rem;
 }
+
+hr {
+  padding: 0;
+  margin: 0;
+}
+
+.section {
+  padding: 7px 0 7px 0;
+  &:hover{
+    background-color: $light-grey;
+}
+
+}
 .container{
   max-width: 800px;
 }
