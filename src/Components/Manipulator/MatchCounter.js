@@ -1,11 +1,10 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { countMatches } from '../../utils/functions';
 
 export default function Replacer({manipulatorTab, setManipulatorTab, handleOnChange}) {
   const {text, matchString, caseSensetive, regexEnabled} = manipulatorTab;
 
-  function handleMatchStringOnChange(e) {
-    const { value, id } = e.target;
+  function handleMatchStringOnChange() {
     const matchingArgs = {
       text,
       matchString,

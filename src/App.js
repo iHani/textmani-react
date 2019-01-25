@@ -10,20 +10,19 @@ export default function App() {
   const [tabs] = useState(allTabs);
   const [activeTab, setActiveTab] = useState("Manipulate text");
   const [manipulatorTab, setManipulatorTab] = useState({
-    text: "0123456789 aa as \\dsass\\ ســـُــٌــٍــًــّــلامم",
+    text: "",
     replaceThis: "",
     replacseWith: "",
-    removeThis: "\\d",
+    removeThis: "",
     matchString: "",
     caseSensetive: false,
-    regexEnabled: true,
+    regexEnabled: false,
     statusMessage: "Ready"
   });
 
   function getComponent(tab) {
     switch (tab) {
-      case "Manipulate text":
-      return (
+      case "Manipulate text": return (
         <Manipulator
           manipulatorTab={manipulatorTab}
           setManipulatorTab={setManipulatorTab}
@@ -34,7 +33,6 @@ export default function App() {
       case "Language detector": return console.log('Language detector tab clicked');
       default:
     }
-    setManipulatorTab({ ...manipulatorTab, statusMessage: "54a21s0sa" });
   }
 
   return (
@@ -47,7 +45,7 @@ export default function App() {
       </div>
       <div className="text-center my-5">
         <hr />
-        Textmani 2019
+        Textmani 2016 - {new Date().getFullYear()}
         <a href="https://github.com/ihani/textmani-react">
           <span> <i className="fab fa-github"></i></span>
         </a>

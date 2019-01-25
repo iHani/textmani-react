@@ -1,8 +1,7 @@
 import React, { useRef } from 'react';
-import { countMatches } from '../../utils/functions';
 
 export default function Options({manipulatorTab, setManipulatorTab}) {
-  const {text, matchString, caseSensetive, regexEnabled} = manipulatorTab;
+  const {caseSensetive, regexEnabled} = manipulatorTab;
   const caseSensetiveRef = useRef();
   const regexEnabledRef = useRef();
 

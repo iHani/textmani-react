@@ -37,7 +37,7 @@ export function countChars(text) {
 * @param {string} matchString - The string we want to count occurence for in text.
 * @param {boolean} caseSensetive
 * @param {boolean} regexEnabled
-* @return {object} error, found - Error message or number of matches.
+* @return {object} ({error, found}) - Error message or number of matches.
 */
 export function countMatches(args){
   let {
@@ -85,7 +85,7 @@ export function countMatches(args){
 * @param {string} string - The string we want to count occurence for in text.
 * @param {boolean} caseSensetive
 * @param {boolean} regexEnabled
-* @return {object} error, replacedText, found - Error message or the replaced text with total number of removes.
+* @return {object} ({error, replacedText, found}) - Error message or the replaced text with total number of removes.
 */
 export function removeSomething(args){
   let {
@@ -126,28 +126,4 @@ export function removeSomething(args){
   } else {
     return ({ error: "No text to count matches against." });
   }
-
-
-
-  //
-  // const {
-  //   text = '',
-  //   string = '',
-  //   // caseSensetive = false,
-  //   // regexEnabled = false
-  // } = args;
-  //
-  // if (!text) {
-  //   return ({ error: "No text to replace." })
-  // } else {
-  //   if (!string) {
-  //     return ({ error: "What would you like to remove?" })
-  //   } else {
-  //     // TODO try/catchh before executing regex here
-  //     const reg = new RegExp(string, "g");
-  //     const replacedText = text.split(reg).join("");
-  //     const found = text.split(string).length - 1;
-  //     return ({ replacedText, found })
-  //   }
-  // }
 }
