@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function Replacer({manipulatorTab, setManipulatorTab, handleOnChange}) {
-  const {text, replaceThis, replacseWith} = manipulatorTab;
+  let {text, replaceThis, replacseWith, caseSensetive, regexEnabled} = manipulatorTab;
 
   function replaceSomething() {
     if (!text) {
@@ -10,8 +10,12 @@ export default function Replacer({manipulatorTab, setManipulatorTab, handleOnCha
       if (!replaceThis || !replacseWith) {
         setManipulatorTab({ ...manipulatorTab, statusMessage: "What would you like to replace?" });
       } else {
+        if (regexEnabled) {
+          const flags = caseSensetive ? "g" : "ig"
+          replaceThis = new RegExp(replaceThis, flags);
+        }
         const replaced = text.split(replaceThis).join(replacseWith)
-        let found = text.split(replaceThis).length - 1
+        const found = text.split(replaceThis).length - 1
         setManipulatorTab({ ...manipulatorTab, text: replaced, statusMessage: `Replaced ${found} times` });
       }
     }

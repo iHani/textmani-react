@@ -8,8 +8,8 @@ export default function Options({manipulatorTab, setManipulatorTab}) {
   function toggleCheckbox({ target }) {
     const {id, defaultChecked} = target;
     const stat = defaultChecked ? "Disabled" : "Enabled";
-    const type = id === "caseSensetive" ? "Case Sensetive " : id === "regexEnabled" ? "Regular Expression " : "";
-    const status = type + stat;
+    const option = id === "caseSensetive" ? "Case Sensetive " : id === "regexEnabled" ? "Regular Expression " : "";
+    const status = option + stat;
     setManipulatorTab({ ...manipulatorTab, [id]: !defaultChecked, statusMessage: status });
   }
 
