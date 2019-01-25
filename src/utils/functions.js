@@ -54,7 +54,7 @@ export function countMatches(args){
       let found = 0;
 
       try {
-        reg = new RegExp(matchString, "g");
+        reg = new RegExp(matchString, flags);
         if (text.match(reg, flags)) {
           found = text.match(reg, flags).length;
           return ({ found });
