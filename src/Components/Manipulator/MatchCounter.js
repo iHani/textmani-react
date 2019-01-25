@@ -1,24 +1,23 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { countMatches } from '../../utils/functions';
 
 export default function Replacer({manipulatorTab, setManipulatorTab, handleOnChange}) {
-  const {text, matchString, caseSensetive, statusMessage} = manipulatorTab;
-  const matches = countMatches(text, matchString, caseSensetive);
-  const caseSensetiveRef = useRef();
+  const {text, matchString, caseSensetive, regexEnabled} = manipulatorTab;
 
-  // useEffect(() => {
-  //   console.log(caseSensetiveRef.current.id);
-  // }, [caseSensetiveRef]);
-
-  function handleThisOnChange({ target }) {
-    const { value, id } = target;
-    setManipulatorTab({ ...manipulatorTab, [id]: value });
-  }
-
-  function toggleCheckbox({ target }) {
-    const found = countMatches(text, matchString, caseSensetive);
-    const status = found ? `found ${found} matches` : `No matches.`;
-    setManipulatorTab({ ...manipulatorTab, [target.id]: !caseSensetive});
+  function handleMatchStringOnChange(e) {
+    const { value, id } = e.target;
+    const matchingArgs = {
+      text,
+      matchString,
+      caseSensetive,
+      regexEnabled
+    };
+    const { error, found } = countMatches(matchingArgs);
+    if (error) {
+      setManipulatorTab({ ...manipulatorTab, statusMessage: error });
+    } else {
+      setManipulatorTab({ ...manipulatorTab, statusMessage: `Found ${found} matches` });
+    }
   }
 
   return (
@@ -31,37 +30,30 @@ export default function Replacer({manipulatorTab, setManipulatorTab, handleOnCha
           <input
             id="matchString"
             value={matchString}
-            onChange={handleThisOnChange}
+            onChange={handleOnChange}
             type="text"
             className="form-control"
             aria-describedby="count words"
             />
-          <small className="form-text text-muted">
-            <div className="form-check">
-              <input
-                type="checkbox"
-                id="caseSensetive"
-                defaultChecked={caseSensetive}
-                onClick={toggleCheckbox}
-                ref={caseSensetiveRef}
-                className="form-check-input"
-                />
-              <label className="form-check-label" htmlFor="caseSensetive">
-                Case sensetive
-              </label>
-            </div>
-          </small>
         </div>
-        <div className="col text-left">
-          {text.trim() && matchString.trim() &&
+        <div className="col">
+          {/*text.trim() && matchString.trim() &&
             <div className={`alert alert-${matches ? 'success' : 'danger'} m-0 p-2`} role="alert">
-              {matches ?
-                <span>Found <strong>{matches}</strong> matches</span>
-                : <span>No matches found</span>
+            {matches ?
+            <span>Found <strong>{matches}</strong> matches</span>
+            : <span>No matches found</span>
             }
-          </div>}
+            </div>*/}
+            <div className="btn-group" role="group" aria-label="Remove something">
+              <button
+                type="button"
+                className="btn btn-warning"
+                onClick={handleMatchStringOnChange}
+                >count
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  );
-}
+    );
+  }

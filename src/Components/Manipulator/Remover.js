@@ -1,19 +1,23 @@
 import React from 'react';
+import { removeSomething } from '../../utils/functions';
 
 export default function Remover({manipulatorTab, setManipulatorTab, handleOnChange}) {
-  const {text, removeThis} = manipulatorTab;
+  const {text, removeThis, caseSensetive, regexEnabled} = manipulatorTab;
+  const madd = /ـ/;
+  const tashkeel = /[ًٌٍَُِّ‘’ْ]/;
 
-  function removeSomething(){
-    if (!text) {
-      setManipulatorTab({ ...manipulatorTab, statusMessage: "No text to replace" });
+  function handleRemoveSomething(string) {
+    const removeArgs = {
+      text,
+      string,
+      caseSensetive,
+      regexEnabled
+    }
+    const { error, replacedText, found } = removeSomething(removeArgs);
+    if (error) {
+      setManipulatorTab({ ...manipulatorTab, statusMessage: error })
     } else {
-      if (!removeThis) {
-        setManipulatorTab({ ...manipulatorTab, statusMessage: "What would you like to remove?" });
-      } else {
-        const replaced = text.split(removeThis).join('');
-        let found = text.split(removeThis).length - 1;
-        setManipulatorTab({ ...manipulatorTab, text: replaced, statusMessage: `Removed ${found} times` });
-      }
+      setManipulatorTab({ ...manipulatorTab, text: replacedText, statusMessage: `Removed ${found} times` });
     }
   }
 
@@ -35,9 +39,24 @@ export default function Remover({manipulatorTab, setManipulatorTab, handleOnChan
         </div>
         <div className="col">
           <div className="btn-group" role="group" aria-label="Remove something">
-            <button type="button" className="btn btn-warning" onClick={removeSomething}>remove</button>
-            <button type="button" className="btn btn-warning">حذف المـد</button>
-            <button type="button" className="btn btn-warning">حذف التشكيل</button>
+            <button
+              type="button"
+              className="btn btn-warning"
+              onClick={() => handleRemoveSomething(removeThis)}
+              >remove
+            </button>
+            <button
+              type="button"
+              className="btn btn-warning"
+              onClick={() => handleRemoveSomething(madd)}
+              >حذف المــد
+            </button>
+            <button
+              type="button"
+              className="btn btn-warning"
+              onClick={() => handleRemoveSomething(tashkeel)}
+              >حذف التشكيل
+            </button>
           </div>
         </div>
       </div>

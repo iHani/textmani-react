@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Header from './Components/Header';
 import Manipulator from './Components/Manipulator/Manipulator';
 import Generator from './Components/Generator';
@@ -10,13 +10,14 @@ export default function App() {
   const [tabs] = useState(allTabs);
   const [activeTab, setActiveTab] = useState("Manipulate text");
   const [manipulatorTab, setManipulatorTab] = useState({
-    text: 'eqw e ewq4545we wq 7740 wq 54 qw 54778 ssd.',
-    replaceThis: '',
-    replacseWith: '',
-    removeThis: '',
-    matchString: '',
+    text: "",
+    replaceThis: "",
+    replacseWith: "",
+    removeThis: "",
+    matchString: "",
+    caseSensetive: false,
     regexEnabled: false,
-    statusMessage: 'Ready'
+    statusMessage: "Ready"
   });
 
   function getComponent(tab) {
@@ -35,7 +36,6 @@ export default function App() {
     }
     setManipulatorTab({ ...manipulatorTab, statusMessage: "54a21s0sa" });
   }
-
 
   return (
     <div>

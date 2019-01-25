@@ -3,7 +3,7 @@ import React from 'react';
 export default function Replacer({manipulatorTab, setManipulatorTab, handleOnChange}) {
   const {text, replaceThis, replacseWith} = manipulatorTab;
 
-  function replaceSomething(){
+  function replaceSomething() {
     if (!text) {
       setManipulatorTab({ ...manipulatorTab, statusMessage: "No text to replace" });
     } else {

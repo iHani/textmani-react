@@ -15,8 +15,6 @@ export default function ChangeCases(props) {
       updated = text.toUpperCase();
       setManipulatorTab({ ...manipulatorTab, text: updated });
       break;
-
-      break;
       default:
     }
   }
