@@ -10,13 +10,13 @@ export default function App() {
   const [tabs] = useState(allTabs);
   const [activeTab, setActiveTab] = useState("Manipulate text");
   const [manipulatorTab, setManipulatorTab] = useState({
-    text: "",
+    text: "0123456789 aa as \\dsass\\ ســـُــٌــٍــًــّــلامم",
     replaceThis: "",
     replacseWith: "",
-    removeThis: "",
+    removeThis: "\\d",
     matchString: "",
     caseSensetive: false,
-    regexEnabled: false,
+    regexEnabled: true,
     statusMessage: "Ready"
   });
 

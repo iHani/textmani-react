@@ -88,24 +88,66 @@ export function countMatches(args){
 * @return {object} error, replacedText, found - Error message or the replaced text with total number of removes.
 */
 export function removeSomething(args){
-  const {
+  let {
     text = '',
     string = '',
-    // caseSensetive = false,
-    // regexEnabled = false
+    caseSensetive = false,
+    regexEnabled = false
   } = args;
 
-  if (!text) {
-    return ({ error: "No text to replace." })
-  } else {
-    if (!string) {
-      return ({ error: "What would you like to remove?" })
+  if (text.trim()) {
+    if (regexEnabled) {
+      const flags = caseSensetive ? "g" : "ig"
+      let reg = null;
+      let found = 0;
+
+      try {
+        reg = new RegExp(string, flags);
+        const regMatch = text.match(reg, flags);
+        if (regMatch) {
+          const replacedText = text.split(reg).join("");
+          const found = regMatch.length;
+          return ({ replacedText, found })
+        }
+        return ({ found });
+      } catch (e) {
+        return ({ error: "Invalid Regex expression." });
+      }
     } else {
-      // TODO try/catchh before executing regex here
-      const reg = new RegExp(string, "g");
-      const replacedText = text.split(reg).join("");
+      if (!caseSensetive) {
+        text = text.toLowerCase();
+        string = string.toLowerCase();
+      }
+      // count matches when regex is disabled by "split"ing it and count number of occurences
+      const replacedText = text.split(string).join("");
       const found = text.split(string).length - 1;
       return ({ replacedText, found })
     }
+  } else {
+    return ({ error: "No text to count matches against." });
   }
+
+
+
+  //
+  // const {
+  //   text = '',
+  //   string = '',
+  //   // caseSensetive = false,
+  //   // regexEnabled = false
+  // } = args;
+  //
+  // if (!text) {
+  //   return ({ error: "No text to replace." })
+  // } else {
+  //   if (!string) {
+  //     return ({ error: "What would you like to remove?" })
+  //   } else {
+  //     // TODO try/catchh before executing regex here
+  //     const reg = new RegExp(string, "g");
+  //     const replacedText = text.split(reg).join("");
+  //     const found = text.split(string).length - 1;
+  //     return ({ replacedText, found })
+  //   }
+  // }
 }
