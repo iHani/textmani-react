@@ -15,16 +15,22 @@ export default function(props) {
     setLangDetectorTab({ ...langDetectorTab, [id]: value, statusMessage: "Ready" });
   }
 
-  function handleDetectLang({ target }) {
-    const { value, id } = target;
-    // get top 2 confidence from lngDetector results
-    const detect = lngDetector.detect(text, 2);
-    // lngDetector.detect returns arrays of an array of two values [<language>, <confidence score>]
-    const mostLikely = Capitalize(detect[0][0]);
-    const lessLikely = Capitalize(detect[1][0]);
-    const status = <span>Most likely <strong>{mostLikely}</strong> - Less likely <strong>{lessLikely}</strong></span>;
-
-    setLangDetectorTab({ ...langDetectorTab, [id]: value, statusMessage: status });
+  function handleDetectLang(text) {
+    if (text.trim()) {
+      // get top 2 confidence from lngDetector results
+      const detect = lngDetector.detect(text, 2);
+      // lngDetector.detect returns arrays of an array of two values [<language>, <confidence score>]
+      const mostLikely = detect[0] ? Capitalize(detect[0][0]): null;
+      const lessLikely = detect[1] ? Capitalize(detect[1][0]) : null;
+      const status = mostLikely ?
+      (<span>Most Likely <strong>{mostLikely}</strong>
+        {lessLikely && <span> - Less Likely <strong>{lessLikely}</strong></span>}
+      </span>)
+      : "Language undetectable!";
+      setLangDetectorTab({ ...langDetectorTab, statusMessage: status });
+    } else {
+      setLangDetectorTab({ ...langDetectorTab, statusMessage: "No text to detect language" });
+    }
   }
 
   return (
@@ -45,11 +51,16 @@ export default function(props) {
       <StatusMessage textareaRef={textareaRef} {...props} />
 
       <div className="text-center mt-4">
-      <div className="btn-group" role="group" aria-label="Change case">
-        <button type="button" className="btn btn-primary" onClick={handleDetectLang}>Detect Language</button>
+        <div className="btn-group" role="group" aria-label="Change case">
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => handleDetectLang(text)}
+            >Detect Language
+          </button>
+        </div>
       </div>
     </div>
-  </div>
   );
 }
 
