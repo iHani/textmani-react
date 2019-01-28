@@ -5,7 +5,7 @@ import Replacer from './Replacer';
 import Remover from './Remover';
 import MatchCounter from './MatchCounter';
 import ChangeCases from './ChangeCases';
-import Scrambler from './Scrambler';
+// import Scrambler from './Scrambler';
 
 export default function(props) {
   const {manipulatorTab, setManipulatorTab} = props;

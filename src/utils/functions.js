@@ -61,7 +61,7 @@ export function countMatches(args){
         }
         return ({ found });
       } catch (e) {
-        return ({ error: "Invalid Regex expression." });
+        return ({ error: "Invalid RegExp expression." });
       }
     } else {
       if (!caseSensetive) {
@@ -95,12 +95,14 @@ export function removeSomething(args){
     regexEnabled = false
   } = args;
 
-
   if (text.trim()) {
 
+    if (!string.trim()) {
+      return ({ error: "What would you like to remove?" });
+    }
+
     if (string === "madd" || string === "tashkeel") {
-      const madd = /ـ/;
-      const tashkeel = /[ًٌٍَُِّ‘’ْ]/;
+      const madd = /ـ/, tashkeel = /[ًٌٍَُِّ‘’ْ]/;
       const type = string === "madd" ? madd : tashkeel;
       const replacedText = text.split(type).join("");
       const found = text.split(type).length - 1;
@@ -133,7 +135,7 @@ export function removeSomething(args){
         }
         return ({ found });
       } catch (e) {
-        return ({ error: "Invalid Regex expression." });
+        return ({ error: "Invalid RegExp expression." });
       }
     } else {
       if (!caseSensetive) {
@@ -146,6 +148,59 @@ export function removeSomething(args){
       return ({ replacedText, found });
     }
   } else {
-    return ({ error: "No text to count matches against." });
+    return ({ error: "No text provided" });
+  }
+}
+
+
+
+/**
+* Replace string with another string.
+* @function
+* @param {object} args - The options object.
+* @param {string} text - The text we want to perform matching against.
+* @param {string} replaceThis - The string we want to count occurence for in text.
+* @param {string} replacseWith - The string we want to count occurence for in text.
+* @param {boolean} caseSensetive
+* @param {boolean} regexEnabled
+* @return {object} ({error, replacedText, found}) - Error message or number of matches, or replaced text with number of replaces
+*/
+export function replaceSomething(args){
+  let {
+    text = '',
+    replaceThis = '',
+    replacseWith = '',
+    caseSensetive = false,
+    regexEnabled = false
+  } = args;
+
+  if (text.trim()) {
+    if (regexEnabled) {
+      const flags = caseSensetive ? "g" : "ig";
+      let reg = null;
+
+      try {
+        reg = new RegExp(replaceThis, flags);
+        if (text.match(reg, flags)) {
+          const replacedText = text.split(replaceThis).join(replacseWith);
+          const found = text.split(replaceThis).length - 1;
+          return ({ replacedText, found });
+        }
+        return ({ found: 0 });
+      } catch (e) {
+        return ({ error: "Invalid RegExp expression." });
+      }
+    } else {
+      if (!caseSensetive) {
+        text = text.toLowerCase();
+        replaceThis = replaceThis.toLowerCase();
+        replacseWith = replacseWith.toLowerCase();
+      }
+      const replacedText = text.split(replaceThis).join(replacseWith);
+      const found = text.split(replaceThis).length - 1;
+      return ({ replacedText, found });
+    }
+  } else {
+    return ({ error: "No text to replace at." });
   }
 }

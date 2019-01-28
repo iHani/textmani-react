@@ -3,12 +3,13 @@ import Header from './Components/Header';
 import Manipulator from './Components/Manipulator/Manipulator';
 import Generator from './Components/Generator';
 import MyDocs from './Components/MyDocs';
+import LangDetector from './Components/LangDetector/LangDetector';
 
 const allTabs = ["Manipulate text", "Lorem ipsum Generator", "Language detector", "My Docs"];
 
 export default function App() {
   const [tabs] = useState(allTabs);
-  const [activeTab, setActiveTab] = useState("Manipulate text");
+  const [activeTab, setActiveTab] = useState("Language detector");
   const [manipulatorTab, setManipulatorTab] = useState({
     text: "",
     replaceThis: "",
@@ -17,6 +18,11 @@ export default function App() {
     matchString: "",
     caseSensetive: false,
     regexEnabled: false,
+    statusMessage: "Ready"
+  });
+
+  const [langDetectorTab, setLangDetectorTab] = useState({
+    text: "Words counter, fix capitalization, replace words, scramble text, generate lorem ipsum and such.",
     statusMessage: "Ready"
   });
 
@@ -30,7 +36,12 @@ export default function App() {
       )
       case "Lorem ipsum Generator": return <Generator />
       case "My Docs": return <MyDocs />
-      case "Language detector": return console.log('Language detector tab clicked');
+      case "Language detector": return (
+        <LangDetector
+          langDetectorTab={langDetectorTab}
+          setLangDetectorTab={setLangDetectorTab}
+          />
+      )
       default:
     }
   }

@@ -1,22 +1,25 @@
 import React from 'react';
+import { replaceSomething } from '../../utils/functions';
 
 export default function Replacer({manipulatorTab, setManipulatorTab, handleOnChange}) {
   let {text, replaceThis, replacseWith, caseSensetive, regexEnabled} = manipulatorTab;
 
-  function replaceSomething() {
+  function handleReplaceSomething(text, replaceThis, replacseWith) {
     if (!text) {
       setManipulatorTab({ ...manipulatorTab, statusMessage: "No text to replace" });
     } else {
-      if (!replaceThis || !replacseWith) {
-        setManipulatorTab({ ...manipulatorTab, statusMessage: "What would you like to replace?" });
+      const replacingArgs = {
+        text,
+        replaceThis,
+        replacseWith,
+        caseSensetive,
+        regexEnabled
+      };
+      const {error, replacedText, found} = replaceSomething(replacingArgs);
+      if (error) {
+        setManipulatorTab({ ...manipulatorTab, statusMessage: error });
       } else {
-        if (regexEnabled) {
-          const flags = caseSensetive ? "g" : "ig";
-          replaceThis = new RegExp(replaceThis, flags);
-        }
-        const replaced = text.split(replaceThis).join(replacseWith);
-        const found = text.split(replaceThis).length - 1;
-        setManipulatorTab({ ...manipulatorTab, text: replaced, statusMessage: `Replaced ${found} times` });
+        setManipulatorTab({ ...manipulatorTab, text: replacedText, statusMessage: `Replaced ${found} times` });
       }
     }
   }
@@ -48,7 +51,7 @@ export default function Replacer({manipulatorTab, setManipulatorTab, handleOnCha
         <div className="col-1 text-right">
           <div className="text-left" aria-label="Replace">
             <button
-              onClick={replaceSomething}
+              onClick={() => handleReplaceSomething(text, replaceThis, replacseWith)}
               type="button"
               className="btn btn-warning"
               >Replace</button>
