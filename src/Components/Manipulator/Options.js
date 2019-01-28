@@ -12,11 +12,11 @@ export default function Options({manipulatorTab, setManipulatorTab}) {
     const status = option + stat;
     setManipulatorTab({ ...manipulatorTab, [id]: !defaultChecked, statusMessage: status });
   }
-
+  
   return (
     <div className="container section">
       <div className="row">
-        <div className="col-3 text-right">
+        <div className="col-2 text-right">
           Options
         </div>
         <div className="col">

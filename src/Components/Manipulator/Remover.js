@@ -10,10 +10,10 @@ export default function Remover({manipulatorTab, setManipulatorTab, handleOnChan
       string,
       caseSensetive,
       regexEnabled
-    }
+    };
     const { error, replacedText, found } = removeSomething(removeArgs);
     if (error) {
-      setManipulatorTab({ ...manipulatorTab, statusMessage: error })
+      setManipulatorTab({ ...manipulatorTab, statusMessage: error });
     } else {
       setManipulatorTab({ ...manipulatorTab, text: replacedText, statusMessage: `Removed ${found} times` });
     }
@@ -22,7 +22,7 @@ export default function Remover({manipulatorTab, setManipulatorTab, handleOnChan
   return (
     <div className="container section">
       <div className="row">
-        <div className="col-3 text-right">
+        <div className="col-2 text-right">
           Remove
         </div>
         <div className="col-4 pb-1">
@@ -42,6 +42,12 @@ export default function Remover({manipulatorTab, setManipulatorTab, handleOnChan
               className="btn btn-warning"
               onClick={() => handleRemoveSomething(removeThis)}
               >remove
+            </button>
+            <button
+              type="button"
+              className="btn btn-warning"
+              onClick={() => handleRemoveSomething("trim lines")}
+              > trim lines
             </button>
             <button
               type="button"

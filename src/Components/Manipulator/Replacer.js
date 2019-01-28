@@ -11,11 +11,11 @@ export default function Replacer({manipulatorTab, setManipulatorTab, handleOnCha
         setManipulatorTab({ ...manipulatorTab, statusMessage: "What would you like to replace?" });
       } else {
         if (regexEnabled) {
-          const flags = caseSensetive ? "g" : "ig"
+          const flags = caseSensetive ? "g" : "ig";
           replaceThis = new RegExp(replaceThis, flags);
         }
-        const replaced = text.split(replaceThis).join(replacseWith)
-        const found = text.split(replaceThis).length - 1
+        const replaced = text.split(replaceThis).join(replacseWith);
+        const found = text.split(replaceThis).length - 1;
         setManipulatorTab({ ...manipulatorTab, text: replaced, statusMessage: `Replaced ${found} times` });
       }
     }
@@ -24,7 +24,7 @@ export default function Replacer({manipulatorTab, setManipulatorTab, handleOnCha
   return (
     <div className="container section">
       <div className="row">
-        <div className="col-3 text-right">
+        <div className="col-2 text-right">
           Replace
         </div>
         <div className="col-4 pb-1">
@@ -39,7 +39,7 @@ export default function Replacer({manipulatorTab, setManipulatorTab, handleOnCha
         </div>
       </div>
       <div className="row">
-        <div className="col-3 text-right">
+        <div className="col-2 text-right">
           with
         </div>
         <div className="col-4">

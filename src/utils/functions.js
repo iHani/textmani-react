@@ -49,7 +49,7 @@ export function countMatches(args){
 
   if (text.trim()) {
     if (regexEnabled) {
-      const flags = caseSensetive ? "g" : "ig"
+      const flags = caseSensetive ? "g" : "ig";
       let reg = null;
       let found = 0;
 
@@ -103,12 +103,23 @@ export function removeSomething(args){
       const tashkeel = /[ًٌٍَُِّ‘’ْ]/;
       const type = string === "madd" ? madd : tashkeel;
       const replacedText = text.split(type).join("");
-      const found = text.split(type).length - 1
+      const found = text.split(type).length - 1;
+      return ({ replacedText, found });
+    }
+
+    if (string === "trim lines") {
+      const lines = text.split(/\n/);
+      let trimmedLines = [];
+      for (var i = 0; i < lines.length; i++) {
+        trimmedLines.push(lines[i].trim());
+      }
+      const found = text.split(/\n/).length - 1;
+      const replacedText = trimmedLines.toString().split(",").join("\n");
       return ({ replacedText, found });
     }
 
     if (regexEnabled) {
-      const flags = caseSensetive ? "g" : "ig"
+      const flags = caseSensetive ? "g" : "ig";
       let reg = null;
       let found = 0;
 
@@ -118,7 +129,7 @@ export function removeSomething(args){
         if (regMatch) {
           const replacedText = text.split(reg).join("");
           const found = regMatch.length;
-          return ({ replacedText, found })
+          return ({ replacedText, found });
         }
         return ({ found });
       } catch (e) {
@@ -132,7 +143,7 @@ export function removeSomething(args){
       // count matches when regex is disabled by "split"ing it and count number of occurences
       const replacedText = text.split(string).join("");
       const found = text.split(string).length - 1;
-      return ({ replacedText, found })
+      return ({ replacedText, found });
     }
   } else {
     return ({ error: "No text to count matches against." });

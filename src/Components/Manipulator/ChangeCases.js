@@ -22,7 +22,7 @@ export default function ChangeCases(props) {
   return (
     <div className="container section">
       <div className="row">
-        <div className="col-3 text-right">
+        <div className="col-2 text-right">
           Change case
         </div>
         <div className="col">
