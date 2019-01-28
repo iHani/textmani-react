@@ -1,5 +1,5 @@
 import React from 'react';
-import { countWords, countChars } from '../../utils/functions'
+import { countWords, countChars } from '../../utils/functions';
 
 export default function CountersStatusClearCopy(props) {
   const {manipulatorTab, setManipulatorTab, textareaRef} = props;

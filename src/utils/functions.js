@@ -99,7 +99,8 @@ export function removeSomething(args){
   if (text.trim()) {
 
     if (string === "madd" || string === "tashkeel") {
-      const madd = /ـ/, tashkeel = /[ًٌٍَُِّ‘’ْ]/;
+      const madd = /ـ/;
+      const tashkeel = /[ًٌٍَُِّ‘’ْ]/;
       const type = string === "madd" ? madd : tashkeel;
       const replacedText = text.split(type).join("");
       const found = text.split(type).length - 1

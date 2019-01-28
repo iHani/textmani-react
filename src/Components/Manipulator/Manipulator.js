@@ -41,8 +41,10 @@ export default function(props) {
       <MatchCounter handleOnChange={handleOnChange} {...props} />
       <hr />
       <ChangeCases {...props} />
+      {/*
       <hr />
       <Scrambler {...props} />
+      */}
     </div>
   );
 }
