@@ -3,8 +3,6 @@ import { removeSomething } from '../../utils/functions';
 
 export default function Remover({manipulatorTab, setManipulatorTab, handleOnChange}) {
   const {text, removeThis, caseSensetive, regexEnabled} = manipulatorTab;
-  const madd = /ـ/;
-  const tashkeel = /[ًٌٍَُِّ‘’ْ]/;
 
   function handleRemoveSomething(string) {
     const removeArgs = {
@@ -48,13 +46,13 @@ export default function Remover({manipulatorTab, setManipulatorTab, handleOnChan
             <button
               type="button"
               className="btn btn-warning"
-              onClick={() => handleRemoveSomething(madd)}
+              onClick={() => handleRemoveSomething("madd")}
               >حذف المــد
             </button>
             <button
               type="button"
               className="btn btn-warning"
-              onClick={() => handleRemoveSomething(tashkeel)}
+              onClick={() => handleRemoveSomething("tashkeel")}
               >حذف التشكيل
             </button>
           </div>

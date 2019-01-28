@@ -10,7 +10,7 @@ export default function App() {
   const [tabs] = useState(allTabs);
   const [activeTab, setActiveTab] = useState("Manipulate text");
   const [manipulatorTab, setManipulatorTab] = useState({
-    text: "",
+    text: "papsosspopo 321.055 الـــًـٍـسـًـْـٍـلام",
     replaceThis: "",
     replacseWith: "",
     removeThis: "",
