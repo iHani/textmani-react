@@ -10,6 +10,20 @@ export default function CountersStatusClearCopy(props) {
     textareaRef.current.focus();
   }
 
+  function copyToClipboard() {
+    if (text.trim()) {
+      if (document.queryCommandSupported('copy')) {
+        textareaRef.current.select();
+        document.execCommand('copy');
+        setManipulatorTab({ ...manipulatorTab, statusMessage: "Copied"});
+      } else {
+        setManipulatorTab({ ...manipulatorTab, statusMessage: "Can not copy from your browser!"});
+      }
+    } else {
+      setManipulatorTab({ ...manipulatorTab, statusMessage: "No text to copy!"});
+    }
+  }
+
   return (
     <div className="container mb-2">
       <div className="row">
@@ -38,7 +52,12 @@ export default function CountersStatusClearCopy(props) {
               onClick={clearText}
               >Clear
             </button>
-            <button type="button" className="btn btn-outline-secondary">Copy</button>
+            <button
+              type="button"
+              className="btn btn-outline-secondary"
+              onClick={copyToClipboard}
+              >Copy
+            </button>
           </div>
         </div>
       </div>
