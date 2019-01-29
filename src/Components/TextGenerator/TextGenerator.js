@@ -1,11 +1,12 @@
 import React, { useRef } from 'react';
 import { generateLipsum } from '../../utils/functions';
 import StatusMessage from './StatusMessage';
+import Options from './Options';
 import TypeAndTimes from './TypeAndTimes';
 
 export default function(props) {
   const {generatorTab, setGeneratorTab} = props;
-  const {text, selectedType, selectedTimes} = generatorTab;
+  const {text, selectedType, selectedTimes, startWithLoremIpsum} = generatorTab;
   const textareaRef = useRef();
 
   // handle onChange event handler for all input(s)
@@ -14,8 +15,18 @@ export default function(props) {
     setGeneratorTab({ ...generatorTab, [id]: value, statusMessage: "Ready" });
   }
 
-  function handleGenerateText() {
-    const lipsumText = generateLipsum(selectedType, selectedTimes);
+  function handleGenerateText(selectedType, selectedTimes) {
+    let lipsumText = generateLipsum(selectedType, selectedTimes);
+
+    if (startWithLoremIpsum) {
+      if (lipsumText.substring(0,12).toLowerCase() !== "lorem ipsum ") {
+        lipsumText = "Lorem ipsum " + lipsumText;
+      }
+    } else {
+      if (lipsumText.substring(0,12).toLowerCase() === "lorem ipsum ") {
+        lipsumText = lipsumText.slice(12);
+      }
+    }
     setGeneratorTab({ ...generatorTab, text: lipsumText, statusMessage: "Text generated" });
   }
 
@@ -35,14 +46,16 @@ export default function(props) {
 
       <StatusMessage textareaRef={textareaRef} {...props} />
 
+      <Options generatorTab={generatorTab} setGeneratorTab={setGeneratorTab}/>
+
       <TypeAndTimes generatorTab={generatorTab} setGeneratorTab={setGeneratorTab} handleOnChange={handleOnChange} />
 
       <div className="text-center mt-4">
         <div className="btn-group" role="group" aria-label="Change case">
           <button
             type="button"
-            className="btn btn-primary"
-            onClick={handleGenerateText}
+            className="btn btn-success"
+            onClick={() => handleGenerateText(selectedType, selectedTimes)}
             autoFocus
             > Generate text
           </button>

@@ -11,7 +11,7 @@ export default function StatusMessage(props) {
   }
 
   return (
-    <div className="container mb-2">
+    <div className="container section">
       <div className="row">
         <div className="col-3">
           <div className="row">

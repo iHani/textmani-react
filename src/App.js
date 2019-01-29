@@ -27,7 +27,7 @@ export default function App() {
   });
 
   const [generatorTab, setGeneratorTab] = useState({
-    text: "Online text manipulator, language detector, dummy text generator, and more.",
+    text: "",
     selectedType: "words",
     selectedTimes: 10,
     startWithLoremIpsum: false,

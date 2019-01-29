@@ -209,13 +209,82 @@ export function replaceSomething(args){
 /**
 * Generate dummy text (lorem ipsum).
 * @function
-* @param {string} type - The text we want to count its words.
-* @param {number} times - The text we want to count its words.
+* @param {string} type - Either words, sentences, or paragraphs.
+* @param {number} times - The number of "type" we want to generate.
 * @return {string} The dummy text.
 */
 export function generateLipsum(type, times) {
-  const grandList = "sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur adipiscing velit, sed quia non-numquam do eius modi tempora incididunt, ut labore et dolore magnam aliquam quaerat voluptatem ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur, quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur, at vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non-provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga et harum quidem rerum facilis est et expedita distinctio nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus, omnis voluptas assumenda est, omnis dolor repellendus temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non-recusandae itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat";
-console.log(grandList.split(" "));
-  console.log(type, times);
-  return `${times} ${type}`
+  const grandList = "sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur adipiscing velit sed quia non-numquam do eius modi tempora incididunt ut labore et dolore magnam aliquam quaerat voluptatem ut enim ad minima veniam quis nostrum exercitationem ullam corporis suscipit laboriosam nisi ut aliquid ex ea commodi consequatur quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur vel illum qui dolorem eum fugiat quo voluptas nulla pariatur at vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint obcaecati cupiditate non-provident similique sunt in culpa qui officia deserunt mollitia animi id est laborum et dolorum fuga et harum quidem rerum facilis est et expedita distinctio nam libero tempore cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus omnis voluptas assumenda est omnis dolor repellendus temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non-recusandae itaque earum rerum hic tenetur a sapiente delectus ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat";
+
+  const grandWords = grandList.split(" ");
+  const grandWordsLength = grandWords.length;
+
+  // Generate random n words from grandList
+  function genWords(n, capitalizeFirst = true) {
+    let words = [], word;
+    for (let i = 0; i < n; i++) {
+      word = grandWords[randomBetween(0, grandWordsLength)];
+      words.push(word);
+    }
+    words[0] = capitalizeFirst ? Capitalize(words[0]) : words[0];
+    return words.join(" ");
+  }
+
+  // Generate random n sentences from grandList
+  function genSentences(n) {
+    const min = randomBetween(3, 6); // range of words in small sentences
+    const max = randomBetween(6, 15); // range of words in long sentences
+    let sentences = [], sentence, capitalizeFirst;
+    for (let i = 0; i < n; i++) {
+      capitalizeFirst = (i === 0); // flag capitalization for the first sentence.
+      sentence = genWords(randomBetween(min, max), capitalizeFirst); // sentence is ~3 to 9 words
+      sentences.push(sentence);
+    }
+    return sentences.join(", ") + ".";
+  }
+
+  // Generate random n sentences from grandList
+  function genParagraphs(n) {
+    const min = randomBetween(5, 8); // range of words in small paragraph
+    const max = randomBetween(8, 15); // range of words in long paragraph
+    let paragraphs = [], paragraph;
+    for (let i = 0; i < n; i++) {
+      paragraph = genSentences(randomBetween(min, max)); // sentence is ~3 to 9 words
+      paragraphs.push(paragraph);
+    }
+    return paragraphs.join("\n\n");
+  }
+
+  // console.log(genParagraphs(3));
+
+  switch (type) {
+    case "words": return genWords(times);
+    case "sentences": return genSentences(times);
+    case "paragraphs": return genParagraphs(times);
+    default:
+    return
+  }
+}
+
+
+/**
+* Get a random number between two numbers.
+* @function
+* @param {number} min - Minimum number.
+* @param {number} max - Maximum number.
+* @return {number} Random number between min and max.
+*/
+export function randomBetween(min, max) {
+  return Math.floor(Math.random() * (max-min+1) + min);
+}
+
+
+/**
+* Capitalize first letter of the string.
+* @function
+* @param {string} type - The text we want to capitalize.
+* @return {string} The Capitalized text.
+*/
+export function Capitalize(string) {
+  return string && string.charAt(0).toUpperCase() + string.slice(1);
 }

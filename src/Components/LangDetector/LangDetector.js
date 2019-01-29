@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { Capitalize } from '../../utils/functions';
 import LanguageDetect from 'languagedetect';
 import StatusMessage from './StatusMessage';
 
@@ -62,8 +63,4 @@ return (
     </div>
   </div>
 );
-}
-
-function Capitalize(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
 }
