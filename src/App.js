@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import Header from './Components/Header';
 import Manipulator from './Components/Manipulator/Manipulator';
-import Generator from './Components/Generator';
-import MyDocs from './Components/MyDocs';
+import TextGenerator from './Components/TextGenerator/TextGenerator';
 import LangDetector from './Components/LangDetector/LangDetector';
+import MyDocs from './Components/MyDocs';
 
-const allTabs = ["Manipulate text", "Lorem ipsum Generator", "Language detector", "My Docs"];
+const allTabs = ["Manipulate text", "Language detector", "Lorem ipsum Generator", "My Docs"];
 
 export default function App() {
   const [tabs] = useState(allTabs);
-  const [activeTab, setActiveTab] = useState("Language detector");
+  const [activeTab, setActiveTab] = useState("Lorem ipsum Generator");
   const [manipulatorTab, setManipulatorTab] = useState({
     text: "",
     replaceThis: "",
@@ -22,8 +22,15 @@ export default function App() {
   });
 
   const [langDetectorTab, setLangDetectorTab] = useState({
-    text: `হিন্দুধর্মের বিভিন্ন সম্প্রদায়ের ধর্মীয় পাণ্ডুলিপি ও ঐতিহাসিক সাহিত্যের সংকলনকে হিন্দু ধর্মগ্রন্থ বলা হয়। কয়েকটি হিন্দু ধর্মগ্রন্থ একাধিক সম্প্রদায়ে স্বীকৃত। এগুলিকেই বৃহত্তর অর্থে হিন্দুশাস্ত্র বলা হয়ে থাকে।[১][২] বেদ ও উপনিষদ্‌ হিন্দুশাস্ত্রের অন্তর্গত। হিন্দুধর্মের বৈচিত্র্যপূর্ণ প্রকৃতির প্রেক্ষাপটে গবেষকরা ‘হিন্দুশাস্ত্রে’র সংজ্ঞা নির্ধারণের বিষয়ে দ্বিধাগ্রস্থ বোধ করেন।[২][৩] কেউ কেউ ভগবদ্গীতা ও আগম শাস্ত্রকে হিন্দুশাস্ত্রের অন্তর্ভুক্ত মনে করেন।[২][৩][৪] অন্যদিকে ডোমিনিক গুডাল ভাগবত পুরাণ ও যাজ্ঞবল্ক্য স্মৃতিকেও হিন্দুশাস্ত্রের অন্তর্ভুক্ত করেছেন।[২]
-`,
+    text: "",
+    statusMessage: "Ready"
+  });
+
+  const [generatorTab, setGeneratorTab] = useState({
+    text: "Online text manipulator, language detector, dummy text generator, and more.",
+    selectedType: "words",
+    selectedTimes: 10,
+    startWithLoremIpsum: false,
     statusMessage: "Ready"
   });
 
@@ -35,7 +42,12 @@ export default function App() {
           setManipulatorTab={setManipulatorTab}
           />
       )
-      case "Lorem ipsum Generator": return <Generator />
+      case "Lorem ipsum Generator": return (
+        <TextGenerator
+          generatorTab={generatorTab}
+          setGeneratorTab={setGeneratorTab}
+          />
+      )
       case "My Docs": return <MyDocs />
       case "Language detector": return (
         <LangDetector

@@ -5,7 +5,7 @@ const Header = ({ tabs, activeTab, setActiveTab }) => (
     <div className="container">
       <div className="py-2 text-center">
         <p className="h3">Textmani</p>
-        <span>Words counter, fix capitalization, replace words, scramble text, generate lorem ipsum and such.</span>
+        <span>Online text manipulator, language detector, dummy text generator, and more.</span>
       </div>
       <ul className="nav nav-tabs">
         {tabs.map((tab, i) => (
