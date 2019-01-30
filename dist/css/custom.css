@@ -6959,3 +6959,8 @@ hr {
 .doc:hover {
   background-color: #e6e6e6;
   cursor: pointer; }
+
+.counters {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-size: .85rem;
+  line-height: 15px; }

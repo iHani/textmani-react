@@ -30,14 +30,14 @@ export default function CountersStatusClearCopy(props) {
         <div className="col-3">
           <div className="row">
             <div className="col-sm-6">
-              <h6>
-                words: {countWords(text)}
-              </h6>
+              <span className="counters">
+                words: <strong>{countWords(text)}</strong>
+              </span>
             </div>
             <div className="col-sm-6">
-              <h6>
-                chars: {countChars(text)}
-              </h6>
+              <span className="counters">
+                chars: <strong>{countChars(text)}</strong>
+              </span>
             </div>
           </div>
         </div>

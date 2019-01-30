@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function Options({generatorTab, setGeneratorTab}) {
-  let {text, startWithLoremIpsum} = generatorTab;
+  let {text = "", startWithLoremIpsum} = generatorTab;
 
   function handleStartWithLoremIpsum(e, text) {
     const {id, defaultChecked} = e.target;

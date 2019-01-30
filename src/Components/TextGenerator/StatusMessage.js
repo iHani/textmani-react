@@ -12,9 +12,9 @@ export default function StatusMessage(props) {
 
   function copyToClipboard() {
     if (text.trim()) {
-      if (document.queryCommandSupported('copy')) {
+      if (document.queryCommandSupported("copy")) {
         textareaRef.current.select();
-        document.execCommand('copy');
+        document.execCommand("copy");
         setGeneratorTab({ ...generatorTab, statusMessage: "Copied"});
       } else {
         setGeneratorTab({ ...generatorTab, statusMessage: "Can not copy from your browser!"});
@@ -25,19 +25,19 @@ export default function StatusMessage(props) {
   }
 
   return (
-    <div className="container section">
+    <div className="container mb-2">
       <div className="row">
         <div className="col-3">
           <div className="row">
             <div className="col-sm-6">
-              <h6>
-                words: {countWords(text)}
-              </h6>
+              <span className="counters">
+                words: <strong>{countWords(text)}</strong>
+              </span>
             </div>
             <div className="col-sm-6">
-              <h6>
-                chars: {countChars(text)}
-              </h6>
+              <span className="counters">
+                chars: <strong>{countChars(text)}</strong>
+              </span>
             </div>
           </div>
         </div>

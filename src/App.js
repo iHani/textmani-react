@@ -1,45 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { getState } from './utils/functions';
 import Header from './Components/Header';
 import Manipulator from './Components/Manipulator/Manipulator';
 import TextGenerator from './Components/TextGenerator/TextGenerator';
 import LangDetector from './Components/LangDetector/LangDetector';
 import MyDocs from './Components/MyDocs';
 
-const allTabs = ["Manipulate text", "Language detector", "Lorem ipsum Generator" /*, "My Docs"*/];
-
 export default function App() {
+  const state = getState(); // get from localStorage, or return initial default state
+  const {localStorageIsAvailable, allTabs} = state;
   const [tabs] = useState(allTabs);
-  const [activeTab, setActiveTab] = useState("Manipulate text");
-  const [manipulatorTab, setManipulatorTab] = useState({
-    text: "",
-    replaceThis: "",
-    replacseWith: "",
-    removeThis: "",
-    matchString: "",
-    caseSensetive: false,
-    regexEnabled: false,
-    statusMessage: "Ready"
-  });
+  const [activeTab, setActiveTab] = useState(state.activeTab);
+  const [manipulatorTab, setManipulatorTab] = useState(state.manipulatorTab);
+  const [langDetectorTab, setLangDetectorTab] = useState(state.langDetectorTab);
+  const [generatorTab, setGeneratorTab] = useState(state.generatorTab);
 
-  const [langDetectorTab, setLangDetectorTab] = useState({
-    text: "",
-    statusMessage: "Ready"
-  });
-
-  const [generatorTab, setGeneratorTab] = useState({
-    selectedType: "Words",
-    selectedTimes: 10,
-    startWithLoremIpsum: false,
-    statusMessage: "Ready"
-  });
-
-  const state = {
-    manipulatorTab,
-    langDetectorTab,
-    generatorTab
-  }
-
-  console.log(state);
+  useEffect(() => {
+    if (localStorageIsAvailable) {
+      const newState = {
+        localStorageIsAvailable,
+        allTabs,
+        activeTab,
+        manipulatorTab,
+        langDetectorTab,
+        generatorTab
+      }
+      localStorage.setItem("textmani_state", JSON.stringify(newState))
+    }
+  })
 
   function getComponent(tab) {
     switch (tab) {

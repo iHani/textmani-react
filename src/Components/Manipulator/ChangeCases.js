@@ -1,4 +1,5 @@
 import React from 'react';
+import { Capitalize } from '../../utils/functions';
 
 export default function ChangeCases(props) {
 
@@ -15,6 +16,10 @@ export default function ChangeCases(props) {
       updated = text.toUpperCase();
       setManipulatorTab({ ...manipulatorTab, text: updated });
       break;
+      case 'capitalizeEachWord':
+      updated = text.toLowerCase().split(" ").map(word => Capitalize(word)).join(" ");
+      setManipulatorTab({ ...manipulatorTab, text: updated });
+      break;
       default:
     }
   }
@@ -29,6 +34,7 @@ export default function ChangeCases(props) {
           <div className="btn-group" role="group" aria-label="Change case">
             <button type="button" className="btn btn-primary" onClick={() => handleChangeCaseTo('lower')}>lowercase</button>
             <button type="button" className="btn btn-primary" onClick={() => handleChangeCaseTo('upper')}>UPPERCASE</button>
+            <button type="button" className="btn btn-primary" onClick={() => handleChangeCaseTo('capitalizeEachWord')}>Capitalize Every Word</button>
           </div>
         </div>
       </div>
