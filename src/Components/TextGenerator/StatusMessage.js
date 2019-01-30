@@ -10,6 +10,20 @@ export default function StatusMessage(props) {
     textareaRef.current.focus();
   }
 
+  function copyToClipboard() {
+    if (text.trim()) {
+      if (document.queryCommandSupported('copy')) {
+        textareaRef.current.select();
+        document.execCommand('copy');
+        setGeneratorTab({ ...generatorTab, statusMessage: "Copied"});
+      } else {
+        setGeneratorTab({ ...generatorTab, statusMessage: "Can not copy from your browser!"});
+      }
+    } else {
+      setGeneratorTab({ ...generatorTab, statusMessage: "No text to copy!"});
+    }
+  }
+
   return (
     <div className="container section">
       <div className="row">
@@ -37,6 +51,12 @@ export default function StatusMessage(props) {
               className="btn btn-outline-secondary"
               onClick={clearText}
               >Clear
+            </button>
+            <button
+              type="button"
+              className="btn btn-outline-secondary"
+              onClick={copyToClipboard}
+              >Copy
             </button>
           </div>
         </div>

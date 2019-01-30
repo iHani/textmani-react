@@ -258,9 +258,9 @@ export function generateLipsum(type, times) {
   // console.log(genParagraphs(3));
 
   switch (type) {
-    case "words": return genWords(times);
-    case "sentences": return genSentences(times);
-    case "paragraphs": return genParagraphs(times);
+    case "Words": return genWords(times);
+    case "Sentences": return genSentences(times);
+    case "Paragraphs": return genParagraphs(times);
     default:
     return
   }

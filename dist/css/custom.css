@@ -6955,3 +6955,7 @@ hr {
   border-radius: 6px;
   padding: 5px;
   background-color: #f7f7f7; }
+
+.doc:hover {
+  background-color: #e6e6e6;
+  cursor: pointer; }

@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function TypeAndTimes({generatorTab, setGeneratorTab}) {
   const {selectedType, selectedTimes} = generatorTab;
-  const availableTypes = ["words", "sentences", "paragraphs"];
+  const availableTypes = ["Words", "Sentences", "Paragraphs"];
   const availableTimes = [1, 3, 5, 10, 20, 50, 100, 250, 500];
 
   function handleClick(e) {

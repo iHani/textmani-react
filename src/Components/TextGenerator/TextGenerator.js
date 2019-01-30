@@ -27,7 +27,7 @@ export default function(props) {
         lipsumText = lipsumText.slice(12);
       }
     }
-    setGeneratorTab({ ...generatorTab, text: lipsumText, statusMessage: "Text generated" });
+    setGeneratorTab({ ...generatorTab, text: lipsumText, statusMessage: `${selectedTimes} ${selectedType} generated` });
   }
 
   return (

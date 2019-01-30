@@ -5,11 +5,11 @@ import TextGenerator from './Components/TextGenerator/TextGenerator';
 import LangDetector from './Components/LangDetector/LangDetector';
 import MyDocs from './Components/MyDocs';
 
-const allTabs = ["Manipulate text", "Language detector", "Lorem ipsum Generator", "My Docs"];
+const allTabs = ["Manipulate text", "Language detector", "Lorem ipsum Generator" /*, "My Docs"*/];
 
 export default function App() {
   const [tabs] = useState(allTabs);
-  const [activeTab, setActiveTab] = useState("Lorem ipsum Generator");
+  const [activeTab, setActiveTab] = useState("Manipulate text");
   const [manipulatorTab, setManipulatorTab] = useState({
     text: "",
     replaceThis: "",
@@ -27,12 +27,19 @@ export default function App() {
   });
 
   const [generatorTab, setGeneratorTab] = useState({
-    text: "",
-    selectedType: "words",
+    selectedType: "Words",
     selectedTimes: 10,
     startWithLoremIpsum: false,
     statusMessage: "Ready"
   });
+
+  const state = {
+    manipulatorTab,
+    langDetectorTab,
+    generatorTab
+  }
+
+  console.log(state);
 
   function getComponent(tab) {
     switch (tab) {
@@ -63,13 +70,15 @@ export default function App() {
     <div>
       <Header tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab}/>
       <div className="container">
-        <div className="py-2">
+        <div className="pt-2 pb-3">
           {getComponent(activeTab)}
         </div>
+        <hr />
       </div>
       <div className="text-center my-5">
-        <hr />
-        Textmani 2016 - {new Date().getFullYear()}
+        <span className="small">
+          Textmani 2016 - {new Date().getFullYear()}
+        </span>
         <a href="https://github.com/ihani/textmani-react">
           <span> <i className="fab fa-github"></i></span>
         </a>
