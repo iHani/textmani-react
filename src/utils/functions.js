@@ -61,7 +61,7 @@ export function countMatches(args){
         }
         return ({ found });
       } catch (e) {
-        return ({ error: "Invalid RegExp expression." });
+        return ({ error: "Invalid Regular Expression!" });
       }
     } else {
       if (!caseSensetive) {
@@ -135,7 +135,7 @@ export function removeSomething(args){
         }
         return ({ found });
       } catch (e) {
-        return ({ error: "Invalid RegExp expression." });
+        return ({ error: "Invalid Regular Expression!" });
       }
     } else {
       if (!caseSensetive) {
@@ -187,7 +187,7 @@ console.log(text);
         }
         return ({ found: 0 });
       } catch (e) {
-        return ({ error: "Invalid RegExp expression." });
+        return ({ error: "Invalid Regular Expression!" });
       }
     } else {
       if (!caseSensetive) {

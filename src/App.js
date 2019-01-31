@@ -24,8 +24,8 @@ export default function App() {
         manipulatorTab,
         langDetectorTab,
         generatorTab
-      }
-      localStorage.setItem("textmani_state", JSON.stringify(newState))
+      };
+      localStorage.setItem("textmani_state", JSON.stringify(newState));
     }
   })
 

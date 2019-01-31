@@ -12,7 +12,7 @@ export default function(props) {
   const {text} = manipulatorTab;
   const textareaRef = useRef();
 
-  // handle onChange event handler for all input(s)
+  // onChange event handler for all input(s)
   function handleOnChange({ target }) {
     const { value, id } = target;
     setManipulatorTab({ ...manipulatorTab, [id]: value, statusMessage: "Ready" });

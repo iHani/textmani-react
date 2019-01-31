@@ -10,7 +10,7 @@ export default function(props) {
   const {text} = langDetectorTab;
   const textareaRef = useRef();
 
-  // handle onChange event handler for all input(s)
+  // onChange event handler for all input(s)
   function handleOnChange({ target }) {
     const { value, id } = target;
     setLangDetectorTab({ ...langDetectorTab, [id]: value, statusMessage: "Ready" });
