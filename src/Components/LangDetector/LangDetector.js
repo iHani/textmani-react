@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-import { Capitalize } from '../../utils/functions';
 import LanguageDetect from 'languagedetect';
+import { Capitalize } from '../../utils/functions';
 import StatusMessage from './StatusMessage';
 
 const lngDetector = new LanguageDetect();

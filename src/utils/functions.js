@@ -322,7 +322,7 @@ export function localStorageAvailable() {
 export function getDefaultState() {
   const state = {
     localStorageIsAvailable: true,
-    allTabs: ["Manipulate text", "Language detector", "Lorem ipsum Generator"],
+    allTabs: ["Manipulate text", "Language detector", "Lorem ipsum Generator", "Text diff"],
     activeTab: "Manipulate text",
     manipulatorTab: {
       text: "",
@@ -344,6 +344,13 @@ export function getDefaultState() {
       startWithLoremIpsum: false,
       statusMessage: "Ready"
     },
+    textDiffTab: {
+      text1: 'Online text manipulator, language detector, dummy text generator, scrambler, and more.',
+      text2: 'Online text manipulators, language detector, dungy text generator, and more.',
+      text1diff: '',
+      text2diff: '',
+      statusMessage: "Ready"
+    }
   }
   localStorage.setItem("textmani_state", JSON.stringify(state));
   return state;

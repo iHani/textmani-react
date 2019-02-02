@@ -1,6 +1,6 @@
 # Textmani
 
-Online tool to manipulate text, detect language, and generate dummy text.
+Online text manipulator, language detector, texts comparison, dummy text generator, and more.
 
 ### Live demo
 
@@ -18,6 +18,10 @@ https://textmani.herokuapp.com
 
 <p align="center">
 <img width="500" src="screenshots/text_generator.png">
+</p>
+
+<p align="center">
+<img width="500" src="screenshots/text_diff.png">
 </p>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
