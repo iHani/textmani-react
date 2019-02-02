@@ -40,7 +40,7 @@ export default function(props) {
           className="form-control"
           ref={textareaRef}
           rows="4"
-          spellcheck="false"
+          spellCheck="false"
           placeholder="Lorem ipsum text will be generated here"
           ></textarea>
       </div>

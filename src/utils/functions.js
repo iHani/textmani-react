@@ -345,8 +345,8 @@ export function getDefaultState() {
       statusMessage: "Ready"
     },
     textDiffTab: {
-      text1: 'Online text manipulator, language detector, dummy text generator, scrambler, and more.',
-      text2: 'Online text manipulators, language detector, dungy text generator, and more.',
+      text1: '',
+      text2: '',
       text1diff: '',
       text2diff: '',
       statusMessage: "Ready"
