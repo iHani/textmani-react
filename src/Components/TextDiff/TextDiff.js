@@ -47,7 +47,7 @@ export default function(props) {
                   onChange={handleOnChange}
                   className="form-control"
                   rows="4"
-                  spellcheck="false"
+                  spellCheck="false"
                   placeholder="Text 1">
                 </textarea>
               </div>
@@ -60,7 +60,7 @@ export default function(props) {
                   onChange={handleOnChange}
                   className="form-control"
                   rows="4"
-                  spellcheck="false"
+                  spellCheck="false"
                   placeholder="Text 2">
                 </textarea>
               </div>
