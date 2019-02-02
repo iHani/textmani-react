@@ -4,7 +4,7 @@ import Header from './Components/Header';
 import Manipulator from './Components/Manipulator/Manipulator';
 import TextGenerator from './Components/TextGenerator/TextGenerator';
 import LangDetector from './Components/LangDetector/LangDetector';
-import MyDocs from './Components/MyDocs';
+import TextDiff from './Components/TextDiff/TextDiff';
 
 export default function App() {
   const state = getState(); // get from localStorage, or return initial default state
@@ -14,6 +14,7 @@ export default function App() {
   const [manipulatorTab, setManipulatorTab] = useState(state.manipulatorTab);
   const [langDetectorTab, setLangDetectorTab] = useState(state.langDetectorTab);
   const [generatorTab, setGeneratorTab] = useState(state.generatorTab);
+  const [textDiffTab, setTextDiffTab] = useState(state.textDiffTab);
 
   useEffect(() => {
     if (localStorageIsAvailable) {
@@ -23,7 +24,8 @@ export default function App() {
         activeTab,
         manipulatorTab,
         langDetectorTab,
-        generatorTab
+        generatorTab,
+        textDiffTab
       };
       localStorage.setItem("textmani_state", JSON.stringify(newState));
     }
@@ -43,11 +45,16 @@ export default function App() {
           setGeneratorTab={setGeneratorTab}
           />
       )
-      case "My Docs": return <MyDocs />
       case "Language detector": return (
         <LangDetector
           langDetectorTab={langDetectorTab}
           setLangDetectorTab={setLangDetectorTab}
+          />
+      )
+      case "Text diff": return (
+        <TextDiff
+          textDiffTab={textDiffTab}
+          setTextDiffTab={setTextDiffTab}
           />
       )
       default:
