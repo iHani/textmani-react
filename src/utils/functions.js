@@ -9,10 +9,10 @@ export function countWords(text = '') {
     let ar = 0, en = 0;
     if (text.match(/\S/g)) {
       //Arabic words
-      let arRegex = /[\u0600-\u06FF]+/g;
+      const arRegex = /[\u0600-\u06FF]+/g;
       if (arRegex.test(text)) { ar = text.match(arRegex).length }
       //English words
-      let enRegex = /\w+/g;
+      const enRegex = /\w+/g;
       if (enRegex.test(text)) { en = text.match(enRegex).length }
       return ar + en
     } else { return 0 }
@@ -172,7 +172,7 @@ export function replaceSomething(args){
     caseSensetive = false,
     regexEnabled = false
   } = args;
-console.log(text);
+
   if (text.trim()) {
     if (regexEnabled) {
       const flags = caseSensetive ? "g" : "ig";
@@ -242,7 +242,7 @@ export function generateLipsum(type, times) {
     return sentences.join(", ") + ".";
   }
 
-  // Generate random n sentences from grandList
+  // Generate random n paragraphs from grandList
   function genParagraphs(n) {
     const min = randomBetween(5, 8); // range of words in small paragraph
     const max = randomBetween(8, 15); // range of words in long paragraph
@@ -319,6 +319,7 @@ export function localStorageAvailable() {
 
 
 // Get default state values
+// TODO field for "lastUpdate" with functionality to update & clear old localStorage
 export function getDefaultState() {
   const state = {
     localStorageIsAvailable: true,
