@@ -4,7 +4,7 @@ Online text manipulator, language detector, texts comparison, dummy text generat
 
 ### Live demo
 
-https://textmani.herokuapp.com
+https://textmani.com
 
 ### Screenshots
 
