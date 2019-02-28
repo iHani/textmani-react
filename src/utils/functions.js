@@ -174,6 +174,11 @@ export function replaceSomething(args){
   } = args;
 
   if (text.trim()) {
+
+    if (!replaceThis || !replacseWith) {
+      return ({ error: "What would you like to replace?" });
+    }
+
     if (regexEnabled) {
       const flags = caseSensetive ? "g" : "ig";
       let reg = null;
