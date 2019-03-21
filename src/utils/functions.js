@@ -97,9 +97,9 @@ export function removeSomething(args){
 
   if (text.trim()) {
 
-    if (!string.trim()) {
-      return ({ error: "What would you like to remove?" });
-    }
+    // if (!string.trim()) {
+    //   return ({ error: "What would you like to remove?" });
+    // }
 
     if (string === "madd" || string === "tashkeel") {
       const madd = /ـ/, tashkeel = /[ًٌٍَُِّ‘’ْ]/;
@@ -299,72 +299,74 @@ export function Capitalize(string) {
 * @return {string} The Capitalized text.
 */
 export function localStorageAvailable() {
-    try {
-        var storage = window["localStorage"],
-            x = '__storage_test__';
-        storage.setItem(x, x);
-        storage.removeItem(x);
-        return true;
-    }
-    catch(e) {
-        return e instanceof DOMException && (
-            // everything except Firefox
-            e.code === 22 ||
-            // Firefox
-            e.code === 1014 ||
-            // test name field too, because code might not be present
-            // everything except Firefox
-            e.name === 'QuotaExceededError' ||
-            // Firefox
-            e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
-            // acknowledge QuotaExceededError only if there's something already stored
-            storage.length !== 0;
-    }
-}
-
-
-// Get default state values
-// TODO field for "lastUpdate" with functionality to update & clear old localStorage
-export function getDefaultState() {
-  const state = {
-    localStorageIsAvailable: true,
-    allTabs: ["Manipulate text", "Language detector", "Lorem ipsum Generator", "Text diff"],
-    activeTab: "Manipulate text",
-    manipulatorTab: {
-      text: "",
-      replaceThis: "",
-      replacseWith: "",
-      removeThis: "",
-      matchString: "",
-      caseSensetive: false,
-      regexEnabled: false,
-      statusMessage: "Ready"
-    },
-    langDetectorTab: {
-      text: "",
-      statusMessage: "Ready"
-    },
-    generatorTab: {
-      selectedType: "Words",
-      selectedTimes: 10,
-      startWithLoremIpsum: false,
-      statusMessage: "Ready"
-    },
-    textDiffTab: {
-      text1: '',
-      text2: '',
-      text1diff: '',
-      text2diff: '',
-      statusMessage: "Ready"
+  try {
+    var storage = window["localStorage"],
+    x = '__storage_test__';
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  }
+  catch(e) {
+    return e instanceof DOMException && (
+      // everything except Firefox
+      e.code === 22 ||
+      // Firefox
+      e.code === 1014 ||
+      // test name field too, because code might not be present
+      // everything except Firefox
+      e.name === 'QuotaExceededError' ||
+      // Firefox
+      e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+      // acknowledge QuotaExceededError only if there's something already stored
+      storage.length !== 0;
     }
   }
-  localStorage.setItem("textmani_state", JSON.stringify(state));
-  return state;
-}
 
-export function getState() {
-  if (localStorageAvailable()) {
-    const state = localStorage.getItem("textmani_state");
-    return state ? JSON.parse(state) : getDefaultState();
+
+  // Get default state values
+  // TODO field for "lastUpdate" with functionality to update & clear old localStorage
+  export function getDefaultState() {
+    const state = {
+      localStorageIsAvailable: true,
+      allTabs: ["Manipulate text", "Language detector", "Lorem ipsum Generator", "Text diff"],
+      activeTab: "Manipulate text",
+      manipulatorTab: {
+        text: "",
+        replaceThis: "",
+        replacseWith: "",
+        removeThis: "",
+        matchString: "",
+        caseSensetive: false,
+        regexEnabled: false,
+        statusMessage: "Ready"
+      },
+      langDetectorTab: {
+        text: "",
+        statusMessage: "Ready"
+      },
+      generatorTab: {
+        selectedType: "Words",
+        selectedTimes: 10,
+        startWithLoremIpsum: false,
+        statusMessage: "Ready"
+      },
+      textDiffTab: {
+        text1: '',
+        text2: '',
+        text1diff: '',
+        text2diff: '',
+        statusMessage: "Ready"
+      }
+    }
+    if (localStorageAvailable()) {
+      localStorage.setItem("textmani_state", JSON.stringify(state));
+    }
+    return state;
   }
-};
+
+  export function getState() {
+    if (localStorageAvailable()) {
+      const state = localStorage.getItem("textmani_state");
+      return state ? JSON.parse(state) : getDefaultState();
+    }
+  };

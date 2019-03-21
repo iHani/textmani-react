@@ -9,7 +9,6 @@ import TextDiff from './Components/TextDiff/TextDiff';
 export default function App() {
   const state = getState(); // get from localStorage, or return initial default state
   const {localStorageIsAvailable, allTabs} = state;
-  const [tabs] = useState(allTabs);
   const [activeTab, setActiveTab] = useState(state.activeTab);
   const [manipulatorTab, setManipulatorTab] = useState(state.manipulatorTab);
   const [langDetectorTab, setLangDetectorTab] = useState(state.langDetectorTab);
@@ -63,7 +62,7 @@ export default function App() {
 
   return (
     <div>
-      <Header tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab}/>
+      <Header tabs={allTabs} activeTab={activeTab} setActiveTab={setActiveTab}/>
       <div className="container">
         <div className="pt-2 pb-3">
           {getComponent(activeTab)}
