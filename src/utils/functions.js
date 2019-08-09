@@ -97,10 +97,6 @@ export function removeSomething(args){
 
   if (text.trim()) {
 
-    // if (!string.trim()) {
-    //   return ({ error: "What would you like to remove?" });
-    // }
-
     if (string === "madd" || string === "tashkeel") {
       const madd = /ـ/, tashkeel = /[ًٌٍَُِّ‘’ْ]/;
       const type = string === "madd" ? madd : tashkeel;

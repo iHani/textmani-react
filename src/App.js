@@ -8,7 +8,7 @@ import TextDiff from './Components/TextDiff/TextDiff';
 
 export default function App() {
   const state = getState(); // get from localStorage, or return initial default state
-  const {localStorageIsAvailable, allTabs} = state;
+  const { localStorageIsAvailable, allTabs } = state;
   const [activeTab, setActiveTab] = useState(state.activeTab);
   const [manipulatorTab, setManipulatorTab] = useState(state.manipulatorTab);
   const [langDetectorTab, setLangDetectorTab] = useState(state.langDetectorTab);
@@ -28,7 +28,7 @@ export default function App() {
       };
       localStorage.setItem("textmani_state", JSON.stringify(newState));
     }
-  })
+  }, []);
 
   function getComponent(tab) {
     switch (tab) {
@@ -36,33 +36,41 @@ export default function App() {
         <Manipulator
           manipulatorTab={manipulatorTab}
           setManipulatorTab={setManipulatorTab}
-          />
+        />
       )
       case "Lorem ipsum Generator": return (
         <TextGenerator
           generatorTab={generatorTab}
           setGeneratorTab={setGeneratorTab}
-          />
+        />
       )
       case "Language detector": return (
         <LangDetector
           langDetectorTab={langDetectorTab}
           setLangDetectorTab={setLangDetectorTab}
-          />
+        />
       )
       case "Text diff": return (
         <TextDiff
           textDiffTab={textDiffTab}
           setTextDiffTab={setTextDiffTab}
-          />
+        />
       )
       default:
     }
   }
 
+  // function clearLocalStorage() {
+  //   console.log("clearLocalStorage");
+    
+  //   localStorage.clear();
+  //   window.location.reload();
+
+  // }
+
   return (
     <div>
-      <Header tabs={allTabs} activeTab={activeTab} setActiveTab={setActiveTab}/>
+      <Header tabs={allTabs} activeTab={activeTab} setActiveTab={setActiveTab} />
       <div className="container">
         <div className="pt-2 pb-3">
           {getComponent(activeTab)}
@@ -73,9 +81,14 @@ export default function App() {
         <span className="small">
           Textmani 2016 - {new Date().getFullYear()}
         </span>
+        {` `}
         <a href="https://github.com/ihani/textmani-react">
           <span> <i className="fab fa-github"></i></span>
         </a>
+        {` `}
+        {/* <a className="small" href="JavaScript:Void(0);" onClick={clearLocalStorage}>
+          <span> Clear localStorage</span>
+        </a> */}
       </div>
     </div>
   );
