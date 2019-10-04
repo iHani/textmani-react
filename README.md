@@ -6,6 +6,15 @@ Online text manipulator, language detector, texts comparison, dummy text generat
 
 https://textmani.com
 
+### Getting Started
+Install and run development environment:
+
+$ `npm i`
+
+$ `npm start`
+
+http://localhost:3000
+
 ### Screenshots
 
 <p align="center">
