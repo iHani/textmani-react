@@ -5,7 +5,7 @@
   "dependencies": {
     "bootstrap": "^4.2.1",
     "languagedetect": "^1.2.0",
-    "node-sass": "4.11.0",
+    "node-sass": "7.0.0",
     "react": "^16.8.0-alpha.1",
     "react-dom": "^16.8.0-alpha.1",
     "react-html-parser": "^2.0.2",
@@ -29,6 +29,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "node-sass": "^4.11.0"
+    "node-sass": "^7.0.0"
   }
 }
