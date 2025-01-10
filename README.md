@@ -4,7 +4,8 @@ Online text manipulator, language detector, texts comparison, dummy text generat
 
 ### Live demo
 
-https://textmani.com
+[https://elated-poincare-45fb56.netlify.app/](https://elated-poincare-45fb56.netlify.app/)
+
 
 ### Getting Started
 Install and run development environment:
